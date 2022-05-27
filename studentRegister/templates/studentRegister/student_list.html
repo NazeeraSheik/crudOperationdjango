@@ -1,0 +1,65 @@
+{% extends "studentRegister/base.html" %}
+{% block content %}
+<table class="table table-border-less">
+	<thead class="border-botton font-weight-bold">
+		<tr>
+			<td>Full Name</td>
+			<td>Mobile</td>
+			<td>Roll No</td>
+			<td>Language</td>
+			<td>
+                 <a href="{% url 'student_insert' %}" class="btn btn-outline-success">
+                                  <i class="fas fa-plus"></i>Add New
+                  </a>
+           </td>
+		</tr>
+	</thead>
+	<tbody>
+		{% for student in student_list %}
+		<tr>
+			<td>{{student.fullname}}</td>
+			<td>{{student.mobile}}</td>
+			<td>{{student.studentid}}</td>
+			<td>{{student.position}}</td>
+
+			<td>
+                   <a href="{% url 'student_update' student.id %}" class="btn text-secondary px-0">
+                           <i class="far fa-edit fa-lg"></i>
+                    </a>
+                    <a href="{% url 'student_delete' student.id %}" class="d-inline">
+                    	   <i class="far fa-trash-alt fa-lg text-danger float-right"></i> 
+                       </a>
+            </td>
+
+        </tr>
+        {% endfor %}
+
+</table>
+<center>
+<nav aria-label="Page navigation example">
+  <ul class="pagination">
+  	{% if student_list.has_previous %}
+    <li class="page-item">
+    	<a class="page-link" href="/student/list/?page=1">First</a>
+    </li>
+    <li class="page-item">
+    	<a class="page-link" href="/student/list/?page={{student_list.previous_page_number}}">Previous</a>
+    </li>
+   {% endif %}
+    {% for n in total_page_list %}
+    <li class="page-item">
+    	<a class="page-link" href="/student/list/?page={{n}}">{{n}}</a></li>
+   {% endfor%}
+    {% if student_list.has_next %}
+
+     <li class="page-item">
+    	<a class="page-link" href="/student/list/?page={{student_list.next_page_number}}">Next</a>
+    </li>
+     <li class="page-item">
+    	<a class="page-link" href="/student/list/?page={{lastpage}}">Last</a>
+    </li>
+   {% endif %} 
+  </ul>
+</nav>
+</center> 
+{% endblock content %}

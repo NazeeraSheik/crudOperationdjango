@@ -1,0 +1,13 @@
+{% extends "studentRegister/base.html" %}
+{% block content %}
+{% load crispy_forms_tags %}
+<a href="{% url 'student_list'%}" class="btn btn-success"><i class="fa-solid fa-users"></i>View Registrations</a>
+<form action="" method="post" autocomplete="off">
+    {% csrf_token %}
+
+    {{form|crispy}}
+    <br>
+    <button type="submit" class="btn btn-success"><i class="fas fa-database"></i> success</button>
+
+</form>
+{% endblock content %}
